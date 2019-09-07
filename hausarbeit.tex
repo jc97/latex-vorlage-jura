@@ -1,0 +1,270 @@
+\documentclass{jura}
+
+%% Für Umlaute, Anführungszeichen, etc.:
+\usepackage[utf8]{inputenc}
+
+%% Anpassungen an Sprache und Region (Datum, etc.)
+%% Wichtigere Sprachen nach hinten stellen.
+%% Das Einfügen von Fremdsprachen dient der Verwendung von foreignlanguage{}.
+\usepackage[english,ngerman]{babel}
+
+%% Aktiviert die westeuropäische Codierung für Texte
+%% (u.a. für verbesserte Silbentrennung)
+\usepackage[T1]{fontenc}
+
+%% Erlaubt die Anpassung der Seiten (Größe, Ausrichtung, Seitenränder, etc.):
+\usepackage[paper=a4paper,left=7cm,right=2.5cm,top=2.2cm,bottom=2.2cm,includeheadfoot,nohead]{geometry}
+
+%% Schriftart
+\usepackage{mathptmx} %Times New Roman
+
+%% Grundschriftgröße:
+\usepackage[12pt]{moresize}
+
+%% Zur Erstellung eines Indexes:
+% \usepackage{makeidx}
+
+%% Zur besseren Formatierung von Captions (bei Figuren / Bildern, etc.):
+% \usepackage{caption}
+
+%% Für float-Optionen:
+% \usepackage{float}
+
+%% Erlaubt die Anpassung der Umgebungen enumerate, itemize und description (z. B. \setlist[itemize,1]{label=$\bullet$}):
+% \usepackage{enumitem}
+
+%% Zur Einbindung von Grafiken: (ähnlich wie graphic, nur mit mehr Optionen und anderen Befehlen):
+% \usepackage{graphicx}
+
+%% Für Zeilenumbrüche in URLs und ähnliches:
+\usepackage{url}
+
+%% Ermöglicht das Anpassen des Zeilenabstandes:
+\usepackage{setspace}
+
+%% Bringt einige vordefinierte Page-Styles mit und erlaubt einfache Anpassung über Koma-Skripte:
+\usepackage{scrpage2}
+
+%% Für die Unterstützung des Euro-Symbols (\euro)
+% \usepackage{eurosym}
+
+%% Bessere Umbrüche:
+\usepackage{ragged2e}
+
+%% Absatzabstände
+\usepackage{parskip}
+
+%% jurabib-Konfiguration:
+\usepackage[
+  bibformat=tabular,
+  annotatorfirstsep=in,
+  pages=format,
+  titleformat=colonsep,
+  howcited=normal,
+  commabeforerest
+]{jurabib}
+\renewcommand*{\bibleftcolumn}{\textwidth/4}
+\makeatletter
+\g@addto@macro\jbmakeinbiblist{%
+	\setlength{\itemsep}{.75\baselineskip}
+}
+\makeatother
+
+%% Anführungszeichen nicht für die Darstellung von Umlauten verwenden:
+\shorthandoff{"}
+
+%% Tiefe des Inhaltsverzeichnisses setzen:
+% \setcounter{tocdepth}{4}
+
+%% Absatzeinzug: 
+\parindent 0pt
+
+%% Einstellungen zur Gernerierung des Blocksatzes:
+\tolerance=1000
+\emergencystretch=10pt
+
+%% Formatierung von Fußnoten:
+\makeatletter
+\renewcommand\@makefntext[1]{%
+   \setlength{\hangindent}{2em}
+   \noindent
+   \hb@xt@\hangindent{%
+      \hss\@textsuperscript{\normalfont\@thefnmark}\hspace{.2em}}#1}
+\makeatother
+
+%% Löscht alle vorkonfigurierten Header / Footer:
+\clearscrheadfoot 
+%% Fußzeile:
+\ofoot[\pagemark]{ \pagemark}
+
+%% Pagestyle, der diese Header anwendet:
+\pagestyle{scrheadings}
+
+%% Stelle identitische Seitenränder sicher:
+\renewcommand*{\frontmatter}{\cleardoublepage\pagenumbering{Roman}%
+	\hsize\frontwidth\columnwidth\hsize\linewidth\hsize\textwidth\hsize}
+\renewcommand*{\mainmatter}{\cleardoublepage\pagenumbering{arabic}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% META-DATEN
+
+\title{Hausarbeit}
+\author{Max Mustermann}
+
+\newcommand{\Matrikelnummer}[0]{123456789}
+\newcommand{\EMail}[0]{meine.e-mail@adresse.xx}
+\newcommand{\Adresse}[0]{Musterstraße 123\\ 12345 Musterstadt}
+\newcommand{\Fachsemesternummer}[0]{1}
+
+\newcommand{\Vorlesung}[0]{Strafrecht AT}
+\newcommand{\Semester}[0]{Wintersemester 2018/19}
+\newcommand{\Dozent}[0]{Prof. Dr. Max Mustermann}
+
+\newcommand{\Fachsemester}[0]{{\Fachsemesternummer}. Fachsemester}
+\makeatletter
+\let\thetitle\@title
+\let\theauthor\@author
+\makeatother
+
+%% Formatierung der Gliederungsebene 1 anpassen:
+\renewcommand*{\lvlastyle}{\fontsize{14}{0} \selectfont \bfseries}
+
+\begin{document}
+
+%% Deckblatt
+\frontmatter
+\thispagestyle{empty}
+%% Seitenränder für das Deckblatt:
+\newgeometry{
+	left=3.5cm,
+	right=2.5cm,
+	top=2.2cm,
+	bottom=2.2cm,
+}
+
+\textbf{\theauthor} \\
+\Adresse \par
+
+\Fachsemester \\
+Matrikelnummer: \Matrikelnummer \\
+E-Mail: \EMail \par
+
+\vspace{110pt}
+
+\begin{center}
+	\textbf{{\fontsize{40}{48} \selectfont \thetitle}} \par
+	\vspace{20pt}
+	\Large{\Vorlesung\\
+	\Semester\\
+	Dozent: \Dozent}
+\end{center}
+
+\newpage
+
+%% Zeilenabstand: 
+\onehalfspacing
+
+\section*{Gliederung}
+
+\makeatletter
+\renewcommand\tableofcontents{%
+	\@starttoc{toc}}
+\makeatother
+
+\tableofcontents
+
+\newpage
+
+\section*{Literarturverzeichnis}
+
+\renewcommand{\bibname}{}
+\renewcommand{\chapter}[1]{}
+\bibliography{Literatur.bib}
+\bibliographystyle{jurabib}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%
+
+\mainmatter
+
+\boldmath
+\restoregeometry
+
+\section*{Gutachten}
+
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr (§§ 212 I, 13 I, 23 I StGB), sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+
+\toc{Mein erster Gliederungspunkt}
+
+Weit hinten, hinter den Wortbergen, fern der Länder Vokalien und Konsonantien leben die Blindtexte. Abgeschieden wohnen sie in Buchstabhausen an der Küste des Semantik, eines großen Sprachozeans. Ein kleines Bächlein namens Duden fließt durch ihren Ort und versorgt sie mit den nötigen Regelialien (§§ 212 I, 13 I, 23 I StGB). Es ist ein paradiesmatisches Land, in dem einem gebratene Satzteile in den Mund fliegen. 
+
+\sub{Erster Unterpunkt (§ 433 I)}
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, 
+
+\toc{Und noch einer...}
+
+Auch gibt es niemanden, der den Schmerz an sich liebt, sucht oder wünscht, nur, weil er Schmerz ist, es sei denn, es kommt zu zufälligen Umständen, in denen Mühen und Schmerz ihm große Freude bereiten können. Um ein triviales Beispiel zu nehmen, wer von uns unterzieht sich je anstrengender körperlicher Betätigung, außer um Vorteile daraus zu ziehen? 
+
+\sub{Es geht noch tiefer...}
+
+\sub{Und noch weiter...}
+
+Überall dieselbe alte Leier. Das Layout ist fertig, der Text lässt auf sich warten. Damit das Layout nun nicht nackt im Raume steht und sich klein und leer vorkommt, springe ich ein: der Blindtext. Genau zu diesem Zwecke erschaffen, immer im Schatten meines großen Bruders »Lorem Ipsum«, freue ich mich jedes Mal, wenn Sie ein paar Zeilen 
+
+\sub{Und noch weiter...}
+
+\toc{Wir bleiben mal auf der Ebene...}
+
+Bla Bla Bla
+
+\textbf{Auch fett}
+
+\textit{oder kursiv}
+
+\textit{\textbf{oder fett und kursiv!}}
+
+\underline{Unterstreichen geht auch...}
+
+\levelup
+\toc{...Und kommen mal wieder hoch.}
+
+\levelup
+\toc{Und noch weiter zurück....}
+
+\levelup
+\levelup
+\toc{Und zwei auf einmal hoch}
+
+\sub{Und wieder herunter...}
+
+\toc{Erklärung zu Fußnoten}
+
+So zitieren wir ein Urteil.\footnote{BGHSt 43, 381, Rn. 61.} Oder so. \footnote{OLG Jena, Beschluss vom 18. Mai 2010, 1 Ss 36/10, juris, Rn. 13.}
+
+Aus einem Lehrbuch.\footcite[\S~14~Rn.~6]{rengier}
+
+Aus einem Kommentar so.\footcite[Sternberg-Lieben/Schuster][\S~15~Rn.~68]{schoenkeschroeder} Oder so.\footcite[Freund][\nopage{\S~323c~Rn.~18}]{mueko} Oder auch so.\footcite[Bosch][\nopage{Vor~\S\S~13~ff.~Rn.~155}]{schoenkeschroeder}
+
+So kombinieren wir mehrere Quellen.\footnote{BGHSt 6, 46, Rn. 23; \cite[Heuchemer][\S~13~Rn.~91]{beckOKStGB}; \cite[236]{esser}.}
+
+\textbf{Das Literaturverzeichnis wird automatisch generiert.}
+
+\levelup
+\toc{Ergebnis}
+
+Georg hat sich nicht strafbar gemacht.
+
+\newpage
+
+\section*{Erklärung der eigenständigen Arbeit}
+
+Hiermit versichere ich, dass ich die Hausarbeit selbstständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt habe, alle Ausführungen, die anderen Schriften wörtlich oder sinngemäß entnommen wurden, kenntlich gemacht sind und die Arbeit in gleicher oder ähnlicher Fassung noch nicht Bestandteil einer Studien- oder Prüfungsleistung war.
+
+\vspace{1.5cm}
+\rule{4cm}{0.1pt} \hfill \rule{7cm}{0.1pt} \\
+\hspace*{0.2cm} Ort, Datum \hspace*{2.4cm} Unterschrift
+
+\end{document}
